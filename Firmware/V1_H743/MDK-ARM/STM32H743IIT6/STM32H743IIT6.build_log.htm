@@ -1,0 +1,74 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.40.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 Jsir2022, 1, LIC=47GU5-GWURK-562Q2-92WCM-YGS9C-9J7JL
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.40.0.3
+Toolchain Path:  D:\Keil_MDK\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.22
+Assembler:       Armasm.exe V6.22
+Linker/Locator:  ArmLink.exe V6.22
+Library Manager: ArmAr.exe V6.22
+Hex Converter:   FromElf.exe V6.22
+CPU DLL:         SARMCM3.DLL V5.40.0.3
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      CMSIS_AGDI.dll V1.33.18.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+U:\Creative2024\Firmware\V1_H743\MDK-ARM\STM32H743IIT6.uvprojx
+Project File Date:  11/19/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.22', folder: 'D:\Keil_MDK\ARM\ARMCLANG\Bin'
+Build target 'STM32H743IIT6'
+../User/Dev/OpticalFlow.c(85): warning: passing 'int8_t *' (aka 'signed char *') to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+   85 |         HAL_SPI_Receive(&hspi1,&Delta_X,1,1);
+      |                                ^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_spi.h(866): note: passing argument to parameter 'pData' here
+  866 | HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                     ^
+../User/Dev/OpticalFlow.c(92): warning: passing 'int8_t *' (aka 'signed char *') to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+   92 |         HAL_SPI_Receive(&hspi1,&Delta_Y,1,1);
+      |                                ^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_spi.h(866): note: passing argument to parameter 'pData' here
+  866 | HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                     ^
+2 warnings generated.
+compiling OpticalFlow.c...
+linking...
+Program Size: Code=51972 RO-data=1400 RW-data=16 ZI-data=13904  
+FromELF: creating hex file...
+"STM32H743IIT6\STM32H743IIT6.axf" - 0 Error(s), 2 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM::CMSIS@6.1.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.1.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32H7xx_DFP.3.1.1.pack
+                Keil::STM32H7xx_DFP@3.1.1
+                STMicroelectronics STM32H7 Series Device Support and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_STM32H743IIT6
+  U:/KeilARM_Repository/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  U:/KeilARM_Repository/Keil/STM32H7xx_DFP/3.1.1/Drivers/CMSIS/Device/ST/STM32H7xx/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@6.1.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

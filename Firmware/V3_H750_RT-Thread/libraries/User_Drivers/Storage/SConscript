@@ -1,0 +1,16 @@
+Import('RTT_ROOT')
+Import('rtconfig')
+from building import *
+import os
+
+cwd = GetCurrentDir()
+group = []
+src = []
+path = [cwd]
+
+if GetDepend(['JSIR_CARD_USING_NAND']):
+    src += ['udrv_nand.c']
+
+group = DefineGroup('Drivers', src, depend = [''], CPPPATH = path)
+
+Return('group')
