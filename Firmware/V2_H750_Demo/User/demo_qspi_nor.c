@@ -61,10 +61,10 @@ void DemoQSPINOR(void)
 
 	printf("\r\n【3 - 写QSPI Flash前10KB空间, 全0x55】\r\n");
 	sfWriteAll(0x55);/* 擦除串行Flash数据，实际上就是写入全0xFF */
-
+#if 0
 	printf("\r\n【4 - 读整个QSPI Flash, %dM字节】\r\n", QSPI_FLASH_SIZES/(1024*1024));
 	sfTestReadSpeed(); /* 读整个串行Flash数据，测试速度 */
-
+#endif
 #if 0
 	printf("\r\n【Y - 擦除整个QSPI Flash】\r\n");
 	printf("整个Flash擦除完毕大概需要300秒左右，请耐心等待");

@@ -62,40 +62,40 @@ void DemoSPINAND(void)
 	}
 	
 	printf("\r\n开始读写NAND Flash.\r\n");
-	uint8_t buff[2048];
-	for(uint16_t i = 0; i<2048; i++)
+	uint8_t buff[4096];
+	for(uint16_t i = 0; i<4096; i++)
 	{
 		buff[i]=0x85;
 	}
 	iTime1 = bsp_GetRunTime();	/* 记下开始时间 */
 	
-	sf_EraseSector(0);
-	sf_PageWrite(buff,0,2048);
+	sf_EraseSector(1);
+	sf_PageWrite(buff,0,4096);
 	
 	iTime2 = bsp_GetRunTime();	/* 记下结束时间 */
-	printf("数据长度: %d字节, 写耗时: %dms, 写速度: %dKB/s\r\n", 2048, iTime2 - iTime1, (10 * 1024) / (iTime2 - iTime1));
+	printf("数据长度: %d字节, 写耗时: %dms, 写速度: %dKB/s\r\n", 4096, iTime2 - iTime1, (10 * 1024) / (iTime2 - iTime1));
 	
-	for(uint16_t i = 0; i<2048; i++)
+	for(uint16_t i = 0; i<4096; i++)
 	{
 		buff[i]=0x0;
 	}
 	
 	iTime1 = bsp_GetRunTime();	/* 记下开始时间 */
 	
-	sf_ReadBuffer(buff,0,2048);
+	sf_ReadBuffer(buff,0,4096);
 	
 	iTime2 = bsp_GetRunTime();	/* 记下结束时间 */
-	printf("数据长度: %d字节, 读耗时: %dms, 读速度: %dKB/s\r\n", 2048, iTime2 - iTime1, (10 * 1024) / (iTime2 - iTime1));
+	printf("数据长度: %d字节, 读耗时: %dms, 读速度: %dKB/s\r\n", 4096, iTime2 - iTime1, (10 * 1024) / (iTime2 - iTime1));
 	
-	for(uint16_t i = 0; i<2048; i++)
+	for(uint16_t i = 0; i<4096; i++)
 	{
 		if(buff[i] != 0x85)
 		{
 			printf("NAND Flash数据有问题!\r\n");
-			break;
+			return;
 		}
 	}
-	printf("NAND Flash检测完毕，读写2Kbyte无问题.\r\n");
+	printf("NAND Flash检测完毕，读写4Kbyte无问题.\r\n");
 }
 
 /*
@@ -164,8 +164,8 @@ void sf_EraseSector(uint32_t _uiSectorAddr)
 	/* 擦除扇区操作 */
 	sf_SetCS(0);									/* 使能片选 */
 	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = CMD_BE;						/* 发送擦除命令 */
-	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xFF0000) >> 16);							/* 8bit Dummy */
+	g_spiTxBuf[g_spiLen++] = 0xD8;						/* 发送擦除命令 */
+	g_spiTxBuf[g_spiLen++] = NULL;							/* 8bit Dummy */
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xFF00) >> 8);		/* 发送扇区地址中间8bit */
 	g_spiTxBuf[g_spiLen++] = (_uiSectorAddr & 0xFF);				/* 发送扇区地址低8bit */	
 	bsp_spiTransfer();
@@ -208,28 +208,33 @@ void sf_EraseChip(void)
 */
 void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 {
-	if (_usSize > 2048) return;
-	
 	sf_WriteEnable();								/* 发送写使能命令 */
 
-	sf_SetCS(0);									/* 使能片选 */
-	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = (0x02);								/* 发送AAI命令(地址自动增加编程) */
-	g_spiTxBuf[g_spiLen++] = 0x00;									/* Dummy 8bit */
-	g_spiTxBuf[g_spiLen++] = 0x00;		/* 发送扇区地址中间8bit */
-	while(_usSize)
+	sf_SetCS(0);	
+	for(uint32_t round=_usSize/2048; round!=0;round--)
 	{
-		g_spiTxBuf[g_spiLen++] = (*_pBuf++);		/* 发送数据 */
-		_usSize--;
+		g_spiLen = 0;
+		g_spiTxBuf[g_spiLen++] = (0x02);								/* 发送AAI命令(地址自动增加编程) */
+		g_spiTxBuf[g_spiLen++] = 0;									/* Dummy 8bit */
+		g_spiTxBuf[g_spiLen++] = 0;									/* 发送扇区地址中间8bit */
+		uint16_t Size = 2048;
+		while(Size)
+		{
+			g_spiTxBuf[g_spiLen++] = (*_pBuf++);		/* 发送数据 */
+			Size--;
+		}
+		bsp_spiTransfer();
+		
+		g_spiLen = 0;
+		g_spiTxBuf[g_spiLen++] = (0x10);							/* 发送读命令 */
+		g_spiTxBuf[g_spiLen++] = NULL;
+		g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xFF00) >> 8);		/* 发送扇区地址中间8bit */
+		g_spiTxBuf[g_spiLen++] = (_uiWriteAddr & 0xFF);				/* 发送扇区地址低8bit */
+		bsp_spiTransfer();
+		HAL_Delay(1);
+		_uiWriteAddr++;
 	}
-	bsp_spiTransfer();
 	
-	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = (0x10);							/* 发送读命令 */
-	g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xFF0000) >> 16);	/* 发送扇区地址的高8bit */
-	g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xFF00) >> 8);		/* 发送扇区地址中间8bit */
-	g_spiTxBuf[g_spiLen++] = (_uiWriteAddr & 0xFF);				/* 发送扇区地址低8bit */
-	bsp_spiTransfer();
 	
 	sf_SetCS(1);								/* 禁止片选 */
 
@@ -269,10 +274,17 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 	/* 擦除扇区操作 */
 	sf_SetCS(0);									/* 使能片选 */
 	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = (CMD_READ);							/* 发送读命令 */
-	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xFF0000) >> 16);	/* 发送扇区地址的高8bit */
-	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xFF00) >> 8);		/* 发送扇区地址中间8bit */
+	g_spiTxBuf[g_spiLen++] = (0x13);							/* 发送读命令 */
+	g_spiTxBuf[g_spiLen++] = NULL;
+	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xFF00) >> 8);		/* 发送扇区地址高8bit */
 	g_spiTxBuf[g_spiLen++] = (_uiReadAddr & 0xFF);				/* 发送扇区地址低8bit */
+	bsp_spiTransfer();
+	
+	g_spiLen = 0;
+	g_spiTxBuf[g_spiLen++] = (0x03);
+	g_spiTxBuf[g_spiLen++] = NULL;
+	g_spiTxBuf[g_spiLen++] = NULL;	
+	g_spiTxBuf[g_spiLen++] = NULL;
 	bsp_spiTransfer();
 	
 	/* 开始读数据，疑问底层DMA缓冲区有限，必须分包读 */
@@ -778,8 +790,9 @@ static void sf_WriteStatus(uint8_t _ucValue)
 */
 static void sf_WaitForWriteEnd(void)
 {
+	
 	sf_SetCS(0);									/* 使能片选 */
-	g_spiTxBuf[0] = (CMD_RDSR);							/* 发送命令， 读状态寄存器 */
+	g_spiTxBuf[0] = (0x0F);							/* 发送命令， 读状态寄存器 */
 	g_spiTxBuf[1] = 0xC0;
 	g_spiLen = 3;
 	bsp_spiTransfer();	
@@ -788,13 +801,13 @@ static void sf_WaitForWriteEnd(void)
 	while(1)
 	{
 		sf_SetCS(0);									/* 使能片选 */
-		g_spiTxBuf[0] = (CMD_RDSR);						/* 发送命令， 读状态寄存器 */
+		g_spiTxBuf[0] = (0x0F);						/* 发送命令， 读状态寄存器 */
 		g_spiTxBuf[1] = 0xC0;		/* 无关数据 */
 		g_spiLen = 3;
 		bsp_spiTransfer();	
 		sf_SetCS(1);									/* 禁能片选 */
 		
-		if ((g_spiRxBuf[2] & WIP_FLAG) != SET)	/* 判断状态寄存器的忙标志位 */
+		if ((g_spiRxBuf[2] & 0x01) != 1)	/* 判断状态寄存器的忙标志位 */
 		{
 			break;
 		}		

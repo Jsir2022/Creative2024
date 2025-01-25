@@ -96,6 +96,7 @@
 #define RT_SERIAL_USING_DMA
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_MTD_NAND
+#define RT_MTD_NAND_DEBUG
 #define RT_USING_SPI
 #define RT_USING_PIN
 

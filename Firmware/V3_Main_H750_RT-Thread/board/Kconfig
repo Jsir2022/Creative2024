@@ -11,6 +11,9 @@ menu "Onboard Peripheral"
 
     config JSIR_CARD_USING_NAND
         bool "Enable NAND FLASH (W25N01GVZEIG)"
+        select BSP_USING_SPI
+        select RT_USING_SPI
+        select BSP_USING_SPI4
         default n
 
 endmenu
