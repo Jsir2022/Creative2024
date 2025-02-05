@@ -36,6 +36,30 @@ struct stm32h7_nand
 static struct rt_mtd_nand_device nand_flash;
 static struct rt_spi_device *spi_device = RT_NULL;
 
+static void nand_resetchip(void)
+{
+    uint8_t cmd_reset_chip[1] = {NAND_CMD_DEV_RST};
+	rt_spi_send(spi_device,cmd_reset_chip,1);
+	
+	rt_thread_mdelay(1);
+	
+//	uint8_t cmd_write_sr[3] = {NAND_CMD_WRITE_SR,PROTECTION_REG,0x00};
+//	rt_spi_send(spi_device,cmd_write_sr,3);
+//	cmd_write_sr[1]=CONFIGURATION_REG;
+//	rt_spi_send(spi_device,cmd_write_sr,3);
+	
+	uint8_t cmd_read_sr[2] = {NAND_CMD_READ_SR,PROTECTION_REG};
+    uint8_t status = 0;
+	rt_spi_send_then_recv(spi_device,cmd_read_sr,2,&status,1);
+	NAND_DEBUG("Protection Register:%x\n",status);
+	cmd_read_sr[1]=CONFIGURATION_REG;
+	rt_spi_send_then_recv(spi_device,cmd_read_sr,2,&status,1);
+	NAND_DEBUG("Configuration Register :%x\n",status);
+	cmd_read_sr[1]=STATUS_REG;
+	rt_spi_send_then_recv(spi_device,cmd_read_sr,2,&status,1);
+	NAND_DEBUG("Status Register:%x\n",status);
+}
+
 static rt_bool_t nand_readstatus(void)
 {
     uint8_t cmd_read_sr[2] = {NAND_CMD_READ_SR,STATUS_REG};
@@ -46,6 +70,16 @@ static rt_bool_t nand_readstatus(void)
     return (status & SR_BUSY_BIT_MASK);
 }
 
+static void nand_waitready(void)
+{
+	// 等待数据加载完成，检查 BUSY 位
+	while (nand_readstatus() != 0)
+	{
+		// 等待 BUSY 位变为 0，表示数据加载完成
+		rt_thread_mdelay(1);  // 可根据需要调整等待时间
+	}
+}
+			
 static void nand_writeenable(void)
 {
     uint8_t cmd_write_en[1] = {NAND_CMD_WRITE_EN};
@@ -98,16 +132,13 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
 		uint8_t cmd_read_page[4]={NAND_CMD_READ_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
 		rt_spi_send(spi_device,cmd_read_page,4);
 		// 等待数据加载完成，检查 BUSY 位
-		while (nand_readstatus() != 0)
-		{
-			// 等待 BUSY 位变为 0，表示数据加载完成
-			rt_thread_mdelay(1);  // 可根据需要调整等待时间
-		}
-		rt_thread_mdelay(10);
+		nand_waitready();
 		//读缓存中的数据
 		uint8_t cmd_read_data[4]={NAND_CMD_READ_BUFF,NULL,NULL,NULL};
-		rt_spi_send_then_recv(spi_device,cmd_read_data,4,data,data_len);
-
+		rt_spi_send_then_recv(spi_device,cmd_read_data,4,data,data_len);//用这条指令会报错
+//		rt_spi_transfer(spi_device,cmd_read_data,data,data_len);
+		
+		
 //        FSMC_NANDECCCmd(FSMC_Bank3_NAND,ENABLE);
 //        dmaRead(data, data_len);
 //        gecc = FSMC_GetECC(FSMC_Bank3_NAND);
@@ -174,46 +205,36 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
     if (data && data_len)
     {
 		rt_uint8_t* pdata = (rt_uint8_t*)data;
-		//写使能
-		nand_writeenable();
 		
 		uint8_t cmd_write_buff[3]={NAND_CMD_WRITE_BUFF,0,0};
 		
 		for(uint32_t round = data_len/PAGE_SIZE; round != 0; round--)
 		{
-			//写缓存
-			rt_spi_send(spi_device,cmd_write_buff,3);
-			rt_spi_send(spi_device,pdata,PAGE_SIZE);
+			//写使能
+			nand_writeenable();
+			//先写指令再写缓存，中间CS拉低不能断
+			rt_spi_send_then_send(spi_device,cmd_write_buff,3,pdata,PAGE_SIZE);
 			pdata=pdata+PAGE_SIZE;
+			nand_waitready();
 			//把缓存中的数据写到页中
 			uint8_t cmd_write_page[4]={NAND_CMD_WRITE_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
 			rt_spi_send(spi_device,cmd_write_page,4);
 			page++;
-			// 等待数据加载完成，检查 BUSY 位
-			while (nand_readstatus() != 0)
-			{
-				// 等待 BUSY 位变为 0，表示数据加载完成
-				rt_thread_mdelay(1);  // 可根据需要调整等待时间
-			}
+			nand_waitready();
 		}
 		
 		uint16_t remain = data_len%PAGE_SIZE;
 		if(remain != 0)
 		{
+			//写使能
+			nand_writeenable();
 			//写缓存
-			rt_spi_send(spi_device,cmd_write_buff,3);
-			rt_spi_send(spi_device,pdata,remain);
+			rt_spi_send_then_send(spi_device,cmd_write_buff,3,pdata,remain);
 			//把缓存中的数据写到页中
 			uint8_t cmd_write_page[4]={NAND_CMD_WRITE_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
 			rt_spi_send(spi_device,cmd_write_page,4);
-			// 等待数据加载完成，检查 BUSY 位
-			while (nand_readstatus() != 0)
-			{
-				// 等待 BUSY 位变为 0，表示数据加载完成
-				rt_thread_mdelay(1);  // 可根据需要调整等待时间
-			}
+			
 		}
-		
 //        if (data_len == PAGE_DATA_SIZE)
 //        {
 //            nand_write8((uint8_t)gecc);
@@ -261,31 +282,20 @@ _exit:
 
 rt_err_t nandflash_eraseblock(struct rt_mtd_nand_device* device, rt_uint32_t block)
 {
-//    rt_uint32_t page;
-//    rt_err_t result;
+	rt_err_t result;
+	result = RT_MTD_EOK;
+	
+	rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+	
+	//写使能
+	nand_writeenable();
+	uint8_t cmd_erase_block[4]={NAND_CMD_ERASE_BLOCK,NULL,(block>>2),(block & 0x3)<<6};
+	rt_spi_send(spi_device,cmd_erase_block,4);
+	nand_waitready();
 
-//    block = block + device->block_start;
+    rt_mutex_release(&_device.lock);
 
-//    result = RT_MTD_EOK;
-//    page = block * 64;
-
-//    rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
-
-//    nand_cmd(NAND_CMD_ERASE0);
-
-//    nand_addr(page);
-//    nand_addr(page >> 8);
-//    nand_addr(page >> 16);
-
-//    nand_cmd(NAND_CMD_ERASE1);
-
-//    nand_waitready();
-
-//    if (nand_readstatus() & 0x01 == 1)
-//        result = -RT_MTD_EIO;
-//    rt_mutex_release(&_device.lock);
-
-//    return (result);
+    return (result);
 }
 
 static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t src_page, rt_off_t dst_page)
@@ -388,6 +398,8 @@ static int rt_hw_mtd_nand_init(void)
         NAND_DEBUG("Failed to probe the W25N01GV.");
         return -RT_ERROR;
     };
+	
+	nand_resetchip();
 	
 	rt_mutex_init(&_device.lock, "nand", RT_IPC_FLAG_FIFO);
 	
