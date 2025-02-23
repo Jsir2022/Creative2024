@@ -36,17 +36,18 @@ struct stm32h7_nand
 static struct rt_mtd_nand_device nand_flash;
 static struct rt_spi_device *spi_device = RT_NULL;
 
+//当写入失败位出现后执行resetchip可以清除写保护
 static void nand_resetchip(void)
 {
-    uint8_t cmd_reset_chip[1] = {NAND_CMD_DEV_RST};
+  uint8_t cmd_reset_chip[1] = {NAND_CMD_DEV_RST};
 	rt_spi_send(spi_device,cmd_reset_chip,1);
 	
 	rt_thread_mdelay(1);
 	
-//	uint8_t cmd_write_sr[3] = {NAND_CMD_WRITE_SR,PROTECTION_REG,0x00};
-//	rt_spi_send(spi_device,cmd_write_sr,3);
-//	cmd_write_sr[1]=CONFIGURATION_REG;
-//	rt_spi_send(spi_device,cmd_write_sr,3);
+	uint8_t cmd_write_sr[3] = {NAND_CMD_WRITE_SR,PROTECTION_REG,0x00};
+	rt_spi_send(spi_device,cmd_write_sr,3);
+	cmd_write_sr[1]=CONFIGURATION_REG;
+	rt_spi_send(spi_device,cmd_write_sr,3);
 	
 	uint8_t cmd_read_sr[2] = {NAND_CMD_READ_SR,PROTECTION_REG};
     uint8_t status = 0;
@@ -133,12 +134,38 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
 		rt_spi_send(spi_device,cmd_read_page,4);
 		// 等待数据加载完成，检查 BUSY 位
 		nand_waitready();
+		
 		//读缓存中的数据
 		uint8_t cmd_read_data[4]={NAND_CMD_READ_BUFF,NULL,NULL,NULL};
-		rt_spi_send_then_recv(spi_device,cmd_read_data,4,data,data_len);//用这条指令会报错
-//		rt_spi_transfer(spi_device,cmd_read_data,data,data_len);
+		/* 动态创建哑数据缓冲区（全0x00） */
+		uint8_t *dummy_tx = (uint8_t *)rt_malloc(data_len);
+		rt_memset(dummy_tx, 0x00, data_len); // 填充哑数据
 		
+		/* 定义消息链 */
+		struct rt_spi_message msg_cmd, msg_data;
+
+		/* 第一阶段：发送命令（忽略接收） */
+		msg_cmd.send_buf   = cmd_read_data;// 发送命令
+		msg_cmd.recv_buf   = NULL;         // 不关心接收数据
+		msg_cmd.length     = 4;            // 命令长度
+		msg_cmd.cs_take    = 1;            // 拉低 CS
+		msg_cmd.cs_release = 0;            // 保持 CS 低电平
+		msg_cmd.next       = &msg_data;    // 链接到下一阶段
 		
+		/* 第二阶段：接收数据（发送哑数据） */
+		msg_data.send_buf   = dummy_tx;    // 发送哑数据（如全0x00）
+		msg_data.recv_buf   = data;	 	   // 接收有效数据
+		msg_data.length     = data_len;    // 数据长度
+		msg_data.cs_take    = 0;           // 保持 CS 低电平
+		msg_data.cs_release = 1;           // 传输完成后释放 CS
+		msg_data.next       = NULL;        // 链式消息结束
+
+		/* 执行传输 */
+		rt_spi_transfer_message(spi_device, &msg_cmd); // 触发链式传输
+		
+		/* 释放哑数据缓冲区 */
+		rt_free(dummy_tx);
+
 //        FSMC_NANDECCCmd(FSMC_Bank3_NAND,ENABLE);
 //        dmaRead(data, data_len);
 //        gecc = FSMC_GetECC(FSMC_Bank3_NAND);

@@ -10,7 +10,7 @@
       <TargetName>rt-thread</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -338,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>__RTTHREAD__, RT_USING_LIBC, RT_USING_ARMLIBC, STM32H750xx, USE_HAL_DRIVER, __CLK_TCK=RT_TICK_PER_SECOND, __STDC_LIMIT_MACROS</Define>
+              <Define>__STDC_LIMIT_MACROS, RT_USING_ARMLIBC, STM32H750xx, RT_USING_LIBC, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>rt-thread\components\fal\inc;board\CubeMX_Config\Core\Inc;rt-thread\components\finsh;rt-thread\libcpu\arm\common;rt-thread\components\net\sal\include\socket\sys_socket;rt-thread\components\drivers\include;libraries\User_Drivers\wireless\firmware;libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Inc;rt-thread\components\drivers\include;rt-thread\components\net\netdev\include;rt-thread\include;rt-thread\components\utilities\ymodem;rt-thread\components\net\lwip\lwip-2.0.3\src\include\netif;rt-thread\components\drivers\include;libraries\HAL_Drivers\CMSIS\Include;rt-thread\components\drivers\wlan;rt-thread\components\net\sal\include\dfs_net;rt-thread\components\net\sal\include\socket;rt-thread\components\libc\compilers\common\extension\fcntl\octal;libraries\User_Drivers\wireless;board;rt-thread\components\net\lwip\port;rt-thread\libcpu\arm\cortex-m7;libraries\HAL_Drivers\drivers;rt-thread\components\net\sal\include;rt-thread\components\drivers\include;rt-thread\components\net\sal\impl;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;board\port;rt-thread\components\libc\posix\io\poll;.;rt-thread\components\libc\posix\ipc;libraries\STM32H7xx_HAL\CMSIS\Device\ST\STM32H7xx\Include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\drivers\include;rt-thread\components\net\lwip\lwip-2.0.3\src\include;rt-thread\components\drivers\include;libraries\HAL_Drivers;libraries\HAL_Drivers\drivers\config;packages\uffs-latest\src\inc;libraries\User_Drivers\Storage;rt-thread\components\net\lwip\lwip-2.0.3\src\include\ipv4;rt-thread\components\dfs\dfs_v1\filesystems\devfs;rt-thread\components\libc\posix\io\epoll;rt-thread\components\dfs\dfs_v1\include;rt-thread\components\libc\posix\io\eventfd;libraries\User_Drivers\wireless\wlan_wiced_lib;packages\uffs-latest;applications;rt-thread\components\libc\compilers\common\include</IncludePath>
+              <IncludePath>libraries\STM32H7xx_HAL\CMSIS\Device\ST\STM32H7xx\Include;rt-thread\components\drivers\wlan;rt-thread\components\libc\posix\io\eventfd;packages\uffs-latest\src\inc;rt-thread\components\drivers\include;board;rt-thread\libcpu\arm\common;rt-thread\components\fal\inc;rt-thread\libcpu\arm\cortex-m7;rt-thread\components\net\sal\include\socket;rt-thread\components\drivers\include;rt-thread\components\net\sal\include\dfs_net;libraries\HAL_Drivers\CMSIS\Include;packages\uffs-latest;rt-thread\components\net\lwip\lwip-2.0.3\src\include\ipv4;rt-thread\components\libc\posix\io\epoll;libraries\User_Drivers\wireless;rt-thread\components\libc\posix\io\poll;rt-thread\components\dfs\dfs_v1\include;rt-thread\components\libc\compilers\common\extension\fcntl\octal;.;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\libc\posix\ipc;rt-thread\components\net\sal\impl;libraries\HAL_Drivers;rt-thread\components\net\netdev\include;libraries\HAL_Drivers\drivers\config;libraries\User_Drivers\wireless\firmware;rt-thread\include;rt-thread\components\drivers\include;board\port;rt-thread\components\finsh;rt-thread\components\net\lwip\lwip-2.0.3\src\include;libraries\HAL_Drivers\drivers;board\CubeMX_Config\Core\Inc;libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Inc;applications;rt-thread\components\net\sal\include\socket\sys_socket;rt-thread\components\net\lwip\lwip-2.0.3\src\include\netif;rt-thread\components\net\lwip\port;rt-thread\components\net\sal\include;rt-thread\components\drivers\include;rt-thread\components\dfs\dfs_v1\filesystems\devfs;rt-thread\components\libc\compilers\common\include;rt-thread\components\drivers\spi;libraries\User_Drivers\Storage;rt-thread\components\drivers\include;rt-thread\components\utilities\ymodem;libraries\User_Drivers\wireless\wlan_wiced_lib;rt-thread\components\drivers\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -489,7 +489,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -545,7 +545,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -601,7 +601,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -657,7 +657,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -713,7 +713,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -769,7 +769,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -825,7 +825,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -881,7 +881,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -937,7 +937,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -993,7 +993,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1049,7 +1049,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1105,7 +1105,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1161,7 +1161,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1217,7 +1217,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1273,7 +1273,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1329,7 +1329,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1385,7 +1385,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1441,7 +1441,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1497,7 +1497,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1553,7 +1553,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1609,7 +1609,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1665,7 +1665,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1721,7 +1721,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1777,7 +1777,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1833,7 +1833,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1889,7 +1889,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1945,7 +1945,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2022,6 +2022,16 @@
           <GroupName>Fal</GroupName>
           <Files>
             <File>
+              <FileName>fal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\fal\src\fal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\fal\src\fal.c</FilePath>
+            </File>
+            <File>
               <FileName>fal_partition.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\fal\src\fal_partition.c</FilePath>
@@ -2030,16 +2040,6 @@
               <FileName>fal_rtt.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\fal\src\fal_rtt.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\fal\src\fal.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\fal\src\fal_flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2077,9 +2077,9 @@
           <GroupName>Finsh</GroupName>
           <Files>
             <File>
-              <FileName>msh_file.c</FileName>
+              <FileName>shell.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
+              <FilePath>rt-thread\components\finsh\shell.c</FilePath>
             </File>
             <File>
               <FileName>msh.c</FileName>
@@ -2092,14 +2092,14 @@
               <FilePath>rt-thread\components\finsh\msh_parse.c</FilePath>
             </File>
             <File>
-              <FileName>shell.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\shell.c</FilePath>
-            </File>
-            <File>
               <FileName>cmd.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\finsh\cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>msh_file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2156,7 +2156,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2212,7 +2212,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2268,7 +2268,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2324,7 +2324,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2380,7 +2380,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2436,7 +2436,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2492,7 +2492,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2548,7 +2548,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2604,7 +2604,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2660,7 +2660,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2716,7 +2716,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2772,7 +2772,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2828,7 +2828,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2884,7 +2884,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2940,7 +2940,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
+                      <IncludePath></IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2982,24 +2982,49 @@
           <GroupName>Libraries</GroupName>
           <Files>
             <File>
+              <FileName>stm32h7xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32h7xx_hal_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_spi.c</FilePath>
             </File>
             <File>
-              <FileName>system_stm32h7xx.c</FileName>
+              <FileName>stm32h7xx_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\CMSIS\Device\ST\STM32H7xx\Source\Templates\system_stm32h7xx.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_pwr.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_ll_sdmmc.c</FileName>
+              <FileName>stm32h7xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_sdmmc.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_usart.c</FileName>
+              <FileName>stm32h7xx_hal_sram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_usart.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sram.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_cortex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_nand.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_nand.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_cryp_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cryp_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sd.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_dma_ex.c</FileName>
@@ -3012,14 +3037,14 @@
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cryp.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_sram.c</FileName>
+              <FileName>stm32h7xx_ll_sdmmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sram.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_sdmmc.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_cec.c</FileName>
+              <FileName>stm32h7xx_hal_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cec.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_ll_delayblock.c</FileName>
@@ -3027,49 +3052,9 @@
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_delayblock.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_rcc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_mdma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_mdma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_uart_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_pwr.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_hal_crc_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_crc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_sd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sd.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_nand.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_nand.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_gpio.c</FileName>
@@ -3077,29 +3062,19 @@
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_rng.c</FileName>
+              <FileName>stm32h7xx_hal_uart_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_rng.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_pwr_ex.c</FileName>
+              <FileName>stm32h7xx_hal_mdma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_pwr_ex.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_mdma.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_cryp_ex.c</FileName>
+              <FileName>stm32h7xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cryp_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_hal_crc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_crc.c</FilePath>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_dma.c</FileName>
@@ -3112,14 +3087,39 @@
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_uart.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_hal_comp.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_comp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_rng.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_rng.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_cec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_cec.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_qspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_pwr_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_pwr_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32h7xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\STM32H7xx_HAL\CMSIS\Device\ST\STM32H7xx\Source\Templates\system_stm32h7xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3357,24 +3357,54 @@
           <GroupName>uffs</GroupName>
           <Files>
             <File>
+              <FileName>uffs_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_rtthread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\uffs_rtthread.c</FilePath>
+            </File>
+            <File>
               <FileName>uffs_mtb.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_mtb.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_utils.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_ecc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_ecc.c</FilePath>
-            </File>
-            <File>
               <FileName>uffs_crc.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_tree.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_tree.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_version.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_version.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_blockinfo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_blockinfo.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_public.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_public.c</FilePath>
             </File>
             <File>
               <FileName>uffs_find.c</FileName>
@@ -3387,44 +3417,9 @@
               <FilePath>packages\uffs-latest\src\uffs\uffs_buf.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_tree.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_tree.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_badblock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_badblock.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_fd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_fd.c</FilePath>
-            </File>
-            <File>
               <FileName>uffs_nandif.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\uffs_nandif.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_rtthread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\uffs_rtthread.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_debug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_debug.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_fs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_fs.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_public.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_public.c</FilePath>
             </File>
             <File>
               <FileName>uffs_pool.c</FileName>
@@ -3437,19 +3432,29 @@
               <FilePath>packages\uffs-latest\src\uffs\uffs_device.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_version.c</FileName>
+              <FileName>uffs_fd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_version.c</FilePath>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_fd.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_blockinfo.c</FileName>
+              <FileName>uffs_utils.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_blockinfo.c</FilePath>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_utils.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_mem.c</FileName>
+              <FileName>uffs_ecc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_mem.c</FilePath>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_ecc.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_badblock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_badblock.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_init.c</FilePath>
             </File>
             <File>
               <FileName>dfs_uffs.c</FileName>
@@ -3457,14 +3462,9 @@
               <FilePath>packages\uffs-latest\dfs_uffs.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_flash.c</FileName>
+              <FileName>uffs_fs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_init.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_init.c</FilePath>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_fs.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3480,6 +3480,16 @@
               <FileName>ymodem.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\utilities\ymodem\ymodem.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>WICED</GroupName>
+          <Files>
+            <File>
+              <FileName>libwifi_6212_armcm7_2.1.2_armcc.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>libraries\User_Drivers\wireless\wlan_wiced_lib\libwifi_6212_armcm7_2.1.2_armcc.lib</FilePath>
             </File>
           </Files>
         </Group>

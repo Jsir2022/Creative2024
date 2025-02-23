@@ -3,18 +3,22 @@ from building import *
 
 cwd = GetCurrentDir()
 
-LIBS    = []
-LIBPATH = []
+LIBS = []
+LIBPATH = [cwd]
 src = []
 
-LIBPATH = [cwd]
 if rtconfig.CROSS_TOOL == 'gcc':
-    LIBS += ['libwifi_6212_armcm7_2.1.2_gcc.a']
+    LIBS += ['libwifi_6212_armcm7_2.1.2_gcc']  # .a 扩展名由构建系统自动处理
 elif rtconfig.CROSS_TOOL == 'keil':
-    LIBS += ['libwifi_6212_armcm7_2.1.2_armcc.lib']
+    LIBS += ['libwifi_6212_armcm7_2.1.2_armcc']  # 无扩展名，构建系统会追加 .lib
 
-path = [cwd]
-
-group = DefineGroup('WICED', src, depend = ['JSIR_CARD_USING_WIFI'], CPPPATH = path, LIBS = LIBS, LIBPATH = LIBPATH)
+group = DefineGroup(
+    'WICED',
+    src,
+    depend=['JSIR_CARD_USING_WIFI'],
+    CPPPATH=[cwd],
+    LIBS=LIBS,
+    LIBPATH=LIBPATH
+)
 
 Return('group')

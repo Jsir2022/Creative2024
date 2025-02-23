@@ -1,7 +1,7 @@
 [
  {
-  "name": "UFFS",
-  "path": "/packages/system/uffs",
-  "ver": "latest"
+  "path": "/packages/system/uffs", 
+  "ver": "latest", 
+  "name": "UFFS"
  }
 ]
