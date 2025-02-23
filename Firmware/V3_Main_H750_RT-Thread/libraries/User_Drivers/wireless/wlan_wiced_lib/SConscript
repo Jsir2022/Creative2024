@@ -9,9 +9,9 @@ src = []
 
 LIBPATH = [cwd]
 if rtconfig.CROSS_TOOL == 'gcc':
-    LIBS += ['wifi_6212_armcm7_2.1.2_gcc']
+    LIBS += ['libwifi_6212_armcm7_2.1.2_gcc.a']
 elif rtconfig.CROSS_TOOL == 'keil':
-    LIBS += ['libwifi_6212_armcm7_2.1.2_armcc']
+    LIBS += ['libwifi_6212_armcm7_2.1.2_armcc.lib']
 
 path = [cwd]
 
