@@ -14,9 +14,11 @@ extern "C" {
 #define PAGE_SIZE			(2048)
 #define PAGE_PER_BLOCK		(64)
 #define TOTAL_BLOCK			(1024)
-#define OOB_SIZE			(64)
-#define OOB_FREE			(60)
-#define BUFF_SIZE			(PAGE_SIZE + PAGE_PER_BLOCK)
+//#define OOB_SIZE			(64) 2025.2.28
+//#define OOB_FREE			(60)
+#define OOB_SIZE			(0)
+#define OOB_FREE			(0)
+//#define BUFF_SIZE			(PAGE_SIZE + PAGE_PER_BLOCK)
 #define PAGE_ADDR_START		(0x0C)			/* 代表Block0的前12页是有特殊功能的 */
 
 

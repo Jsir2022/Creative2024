@@ -1,5 +1,10 @@
 [
  {
+  "path": "/packages/system/yaffs2", 
+  "ver": "latest", 
+  "name": "YAFFS"
+ }, 
+ {
   "path": "/packages/system/uffs", 
   "ver": "latest", 
   "name": "UFFS"

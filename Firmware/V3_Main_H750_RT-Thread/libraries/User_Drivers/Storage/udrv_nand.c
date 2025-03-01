@@ -166,6 +166,8 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
 		/* 释放哑数据缓冲区 */
 		rt_free(dummy_tx);
 
+//TODO：ECC校验和读取空闲区部分
+
 //        FSMC_NANDECCCmd(FSMC_Bank3_NAND,ENABLE);
 //        dmaRead(data, data_len);
 //        gecc = FSMC_GetECC(FSMC_Bank3_NAND);
@@ -262,6 +264,9 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
 			rt_spi_send(spi_device,cmd_write_page,4);
 			
 		}
+		
+//TODO：ECC校验和读取空闲区部分
+		
 //        if (data_len == PAGE_DATA_SIZE)
 //        {
 //            nand_write8((uint8_t)gecc);
@@ -325,6 +330,49 @@ rt_err_t nandflash_eraseblock(struct rt_mtd_nand_device* device, rt_uint32_t blo
     return (result);
 }
 
+#if 0
+static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t src_page, rt_off_t dst_page)
+{
+    rt_err_t result = RT_MTD_EOK;
+    uint8_t cmd_src[5], cmd_dst[5];
+
+    // 计算物理页地址（考虑块起始偏移）
+    src_page += device->block_start * device->pages_per_block;
+    dst_page += device->block_start * device->pages_per_block;
+
+    // 检查目标页是否在有效范围内
+    if (dst_page / device->pages_per_block > device->block_end) {
+        return -RT_MTD_EIO;
+    }
+
+    rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+
+    /*------------------ 1. 发送 Copy-Back 读命令 ------------------*/
+    // 命令序列: NAND_CMD_RDCOPYBACK -> 地址 -> NAND_CMD_RDCOPYBACK_TRUE
+    uint8_t cmd_copyback_read[] = {NAND_CMD_RDCOPYBACK, 0x00, 0x00, (src_page & 0xFF), (src_page >> 8) & 0xFF, (src_page >> 16) & 0xFF};
+    rt_spi_send(spi_device, cmd_copyback_read, sizeof(cmd_copyback_read));
+    
+    // 等待 Flash 准备就绪
+    nand_waitready();
+
+    /*------------------ 2. 发送 Copy-Back 编程命令 ------------------*/
+    // 命令序列: NAND_CMD_COPYBACKPGM -> 地址 -> NAND_CMD_COPYBACKPGM_TRUE
+    uint8_t cmd_copyback_program[] = {NAND_CMD_COPYBACKPGM, 0x00, 0x00, (dst_page & 0xFF), (dst_page >> 8) & 0xFF, (dst_page >> 16) & 0xFF};
+    rt_spi_send(spi_device, cmd_copyback_program, sizeof(cmd_copyback_program));
+    
+    // 等待操作完成
+    nand_waitready();
+
+    /*------------------ 3. 检查操作状态 ------------------*/
+    if ((nand_readstatus() & 0x01) != 0) {
+        result = -RT_MTD_EIO; // 操作失败（如写保护或坏块）
+    }
+
+_exit:
+    rt_mutex_release(&_device.lock);
+    return result;
+}
+#else
 static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t src_page, rt_off_t dst_page)
 {
 //    rt_err_t result;
@@ -365,7 +413,7 @@ static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t s
 
 //    return (result);
 }
-
+#endif
 static rt_err_t nandflash_checkblock(struct rt_mtd_nand_device* device, rt_uint32_t block)
 {
     return (RT_MTD_EOK);
@@ -409,17 +457,22 @@ static int rt_hw_mtd_nand_init(void)
 	struct rt_spi_configuration cfg;
     cfg.data_width = 8;
     cfg.mode = RT_SPI_MASTER | RT_SPI_MODE_0 | RT_SPI_MSB;
-    cfg.max_hz = 2 * 1000 *1000; //稳定起见，使用2MHz。测试过最高30MHz
+    cfg.max_hz = 30 * 1000 *1000; //稳定起见，使用2MHz。测试过最高30MHz
     rt_spi_configure(spi_device, &cfg);
 
     nand_flash.page_size   = PAGE_SIZE;
-    nand_flash.pages_per_block = PAGE_PER_BLOCK;
-    nand_flash.block_total = TOTAL_BLOCK;
-    nand_flash.oob_size    = OOB_SIZE;
+	nand_flash.oob_size    = OOB_SIZE;
     nand_flash.oob_free    = OOB_FREE;
-    nand_flash.block_start = 0;
+	nand_flash.plane_num   = 1;
+	
+    nand_flash.pages_per_block = PAGE_PER_BLOCK;
+    nand_flash.block_total = TOTAL_BLOCK-1;
+    
+    nand_flash.block_start = 1;
     nand_flash.block_end   = TOTAL_BLOCK-1;
+	
     nand_flash.ops         = &ops;
+	
 	if (RT_EOK != rt_mtd_nand_register_device("nand0", &nand_flash))
     {
         NAND_DEBUG("Failed to probe the W25N01GV.");

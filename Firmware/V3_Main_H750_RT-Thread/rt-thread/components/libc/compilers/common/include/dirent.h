@@ -31,13 +31,13 @@ extern "C" {
 #define FT_NONLOCK      6   /* non lock */
 
 #define DT_UNKNOWN      0x00
-#define DT_FIFO         0x01
-#define DT_CHR          0x02
+//#define DT_FIFO         0x01
+//#define DT_CHR          0x02
 #define DT_DIR          0x04
-#define DT_BLK          0x06
+//#define DT_BLK          0x06
 #define DT_REG          0x08
-#define DT_LNK          0x0a
-#define DT_SOCK         0x0c
+//#define DT_LNK          0x0a
+//#define DT_SOCK         0x0c
 #define DT_SYMLINK      DT_LNK
 
 #ifndef HAVE_DIR_STRUCTURE

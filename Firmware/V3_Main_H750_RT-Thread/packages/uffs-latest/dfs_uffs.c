@@ -657,4 +657,3 @@ int dfs_uffs_init(void)
     return -RT_ERROR;
 }
 INIT_COMPONENT_EXPORT(dfs_uffs_init);
-
