@@ -137,7 +137,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>121</LineNumber>
+          <LineNumber>312</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -153,7 +153,7 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>225</LineNumber>
+          <LineNumber>318</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -660,8 +660,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>rt-thread\components\fal\src\fal_rtt.c</PathWithFileName>
-      <FilenameWithoutPath>fal_rtt.c</FilenameWithoutPath>
+      <PathWithFileName>rt-thread\components\fal\src\fal_partition.c</PathWithFileName>
+      <FilenameWithoutPath>fal_partition.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -672,8 +672,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>rt-thread\components\fal\src\fal_partition.c</PathWithFileName>
-      <FilenameWithoutPath>fal_partition.c</FilenameWithoutPath>
+      <PathWithFileName>rt-thread\components\fal\src\fal_flash.c</PathWithFileName>
+      <FilenameWithoutPath>fal_flash.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -684,8 +684,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>rt-thread\components\fal\src\fal_flash.c</PathWithFileName>
-      <FilenameWithoutPath>fal_flash.c</FilenameWithoutPath>
+      <PathWithFileName>rt-thread\components\fal\src\fal_rtt.c</PathWithFileName>
+      <FilenameWithoutPath>fal_rtt.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1417,7 +1417,7 @@
 
   <Group>
     <GroupName>uffs</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1440,18 +1440,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>packages\uffs-latest\uffs_rtthread.c</PathWithFileName>
-      <FilenameWithoutPath>uffs_rtthread.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>11</GroupNumber>
-      <FileNumber>96</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>packages\uffs-latest\src\uffs\uffs_mtb.c</PathWithFileName>
       <FilenameWithoutPath>uffs_mtb.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1459,7 +1447,7 @@
     </File>
     <File>
       <GroupNumber>11</GroupNumber>
-      <FileNumber>97</FileNumber>
+      <FileNumber>96</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1471,13 +1459,25 @@
     </File>
     <File>
       <GroupNumber>11</GroupNumber>
-      <FileNumber>98</FileNumber>
+      <FileNumber>97</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>packages\uffs-latest\src\uffs\uffs_tree.c</PathWithFileName>
       <FilenameWithoutPath>uffs_tree.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>11</GroupNumber>
+      <FileNumber>98</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>packages\uffs-latest\dfs_uffs.c</PathWithFileName>
+      <FilenameWithoutPath>dfs_uffs.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1500,8 +1500,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>packages\uffs-latest\dfs_uffs.c</PathWithFileName>
-      <FilenameWithoutPath>dfs_uffs.c</FilenameWithoutPath>
+      <PathWithFileName>packages\uffs-latest\src\uffs\uffs_version.c</PathWithFileName>
+      <FilenameWithoutPath>uffs_version.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1512,8 +1512,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>packages\uffs-latest\src\uffs\uffs_version.c</PathWithFileName>
-      <FilenameWithoutPath>uffs_version.c</FilenameWithoutPath>
+      <PathWithFileName>packages\uffs-latest\uffs_rtthread.c</PathWithFileName>
+      <FilenameWithoutPath>uffs_rtthread.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1608,8 +1608,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>packages\uffs-latest\src\uffs\uffs_fd.c</PathWithFileName>
-      <FilenameWithoutPath>uffs_fd.c</FilenameWithoutPath>
+      <PathWithFileName>packages\uffs-latest\uffs_nandif.c</PathWithFileName>
+      <FilenameWithoutPath>uffs_nandif.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1620,8 +1620,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>packages\uffs-latest\src\uffs\uffs_utils.c</PathWithFileName>
-      <FilenameWithoutPath>uffs_utils.c</FilenameWithoutPath>
+      <PathWithFileName>packages\uffs-latest\src\uffs\uffs_fd.c</PathWithFileName>
+      <FilenameWithoutPath>uffs_fd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1632,8 +1632,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>packages\uffs-latest\uffs_nandif.c</PathWithFileName>
-      <FilenameWithoutPath>uffs_nandif.c</FilenameWithoutPath>
+      <PathWithFileName>packages\uffs-latest\src\uffs\uffs_utils.c</PathWithFileName>
+      <FilenameWithoutPath>uffs_utils.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1682,302 +1682,6 @@
       <bDave2>0</bDave2>
       <PathWithFileName>packages\uffs-latest\src\uffs\uffs_fs.c</PathWithFileName>
       <FilenameWithoutPath>uffs_fs.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-  </Group>
-
-  <Group>
-    <GroupName>yaffs</GroupName>
-    <tvExp>0</tvExp>
-    <tvExpOptDlg>0</tvExpOptDlg>
-    <cbSel>0</cbSel>
-    <RteFlg>0</RteFlg>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>116</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_yaffs2.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_yaffs2.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>117</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_allocator.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_allocator.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>118</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_tagscompat.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_tagscompat.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>119</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_endian.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_endian.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>120</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_checkptrw.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_checkptrw.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>121</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\direct\yaffs_attribs.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_attribs.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>122</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_tagsmarshall.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_tagsmarshall.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>123</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_nameval.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_nameval.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>124</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_bitmap.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_bitmap.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>125</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_packedtags2.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_packedtags2.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>126</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\direct\yaffs_hweight.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_hweight.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>127</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_ecc.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_ecc.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>128</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_yaffs1.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_yaffs1.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>129</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_cache.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_cache.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>130</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_verify.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_verify.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>131</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_nand.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_nand.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>132</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs_flashif.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_flashif.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>133</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\direct\yaffs_error.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_error.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>134</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\dfs_yaffs_s.c</PathWithFileName>
-      <FilenameWithoutPath>dfs_yaffs_s.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>135</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_summary.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_summary.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>136</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs_osglue.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_osglue.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>137</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_guts.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_guts.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>138</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\yaffs_packedtags1.c</PathWithFileName>
-      <FilenameWithoutPath>yaffs_packedtags1.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>139</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>packages\yaffs2-latest\yaffs\direct\yaffsfs.c</PathWithFileName>
-      <FilenameWithoutPath>yaffsfs.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

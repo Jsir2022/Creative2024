@@ -10,7 +10,7 @@
       <TargetName>rt-thread</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__STDC_LIMIT_MACROS, RT_USING_ARMLIBC, STM32H750xx, RT_USING_LIBC, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>libraries\STM32H7xx_HAL\CMSIS\Device\ST\STM32H7xx\Include;rt-thread\components\libc\posix\io\eventfd;packages\uffs-latest\src\inc;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\include;rt-thread\libcpu\arm\common;rt-thread\components\fal\inc;rt-thread\libcpu\arm\cortex-m7;packages\yaffs2-latest\yaffs\direct;libraries\HAL_Drivers\CMSIS\Include;packages\uffs-latest;rt-thread\components\libc\posix\io\epoll;libraries\User_Drivers\wireless;rt-thread\components\libc\posix\io\poll;rt-thread\components\dfs\dfs_v1\include;rt-thread\components\libc\compilers\common\extension\fcntl\octal;.;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\libc\posix\ipc;libraries\HAL_Drivers;libraries\HAL_Drivers\drivers\config;libraries\User_Drivers\wireless\firmware;rt-thread\include;rt-thread\components\drivers\include;board\port;rt-thread\components\finsh;libraries\HAL_Drivers\drivers;board\CubeMX_Config\Core\Inc;libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Inc;applications;rt-thread\components\drivers\include;rt-thread\components\dfs\dfs_v1\filesystems\devfs;board;rt-thread\components\drivers\spi;packages\yaffs2-latest\yaffs;libraries\User_Drivers\Storage;rt-thread\components\drivers\include;rt-thread\components\drivers\include</IncludePath>
+              <IncludePath>libraries\STM32H7xx_HAL\CMSIS\Device\ST\STM32H7xx\Include;rt-thread\components\libc\posix\io\eventfd;packages\uffs-latest\src\inc;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\include;rt-thread\libcpu\arm\common;rt-thread\components\fal\inc;rt-thread\libcpu\arm\cortex-m7;libraries\HAL_Drivers\CMSIS\Include;packages\uffs-latest;rt-thread\components\libc\posix\io\epoll;libraries\User_Drivers\wireless;rt-thread\components\libc\posix\io\poll;rt-thread\components\dfs\dfs_v1\include;rt-thread\components\libc\compilers\common\extension\fcntl\octal;.;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\libc\posix\ipc;libraries\HAL_Drivers;libraries\HAL_Drivers\drivers\config;libraries\User_Drivers\wireless\firmware;rt-thread\include;rt-thread\components\drivers\include;board\port;rt-thread\components\finsh;libraries\HAL_Drivers\drivers;board\CubeMX_Config\Core\Inc;libraries\STM32H7xx_HAL\STM32H7xx_HAL_Driver\Inc;applications;rt-thread\components\drivers\include;rt-thread\components\dfs\dfs_v1\filesystems\devfs;board;rt-thread\components\drivers\spi;libraries\User_Drivers\Storage;rt-thread\components\drivers\include;rt-thread\components\drivers\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -489,7 +489,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -545,7 +545,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -601,7 +601,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -657,7 +657,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -713,7 +713,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -769,7 +769,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -825,7 +825,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -881,7 +881,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -937,7 +937,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -993,7 +993,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1049,7 +1049,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1105,7 +1105,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1161,7 +1161,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1217,7 +1217,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1273,7 +1273,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_IPC_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1335,11 +1335,6 @@
           <GroupName>Fal</GroupName>
           <Files>
             <File>
-              <FileName>fal_rtt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\fal\src\fal_rtt.c</FilePath>
-            </File>
-            <File>
               <FileName>fal_partition.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\fal\src\fal_partition.c</FilePath>
@@ -1348,6 +1343,11 @@
               <FileName>fal_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\fal\src\fal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_rtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\fal\src\fal_rtt.c</FilePath>
             </File>
             <File>
               <FileName>fal.c</FileName>
@@ -1469,7 +1469,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1525,7 +1525,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1581,7 +1581,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1637,7 +1637,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1693,7 +1693,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1749,7 +1749,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1805,7 +1805,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1861,7 +1861,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1917,7 +1917,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -1973,7 +1973,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2029,7 +2029,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2085,7 +2085,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2141,7 +2141,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2197,7 +2197,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2253,7 +2253,7 @@
                       <MiscControls> </MiscControls>
                       <Define>__RT_KERNEL_SOURCE__</Define>
                       <Undefine> </Undefine>
-                      <IncludePath></IncludePath>
+                      <IncludePath> </IncludePath>
                     </VariousControls>
                   </Cads>
                 </FileArmAds>
@@ -2435,11 +2435,6 @@
               <FilePath>packages\uffs-latest\src\uffs\uffs_mem.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_rtthread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\uffs_rtthread.c</FilePath>
-            </File>
-            <File>
               <FileName>uffs_mtb.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_mtb.c</FilePath>
@@ -2455,19 +2450,24 @@
               <FilePath>packages\uffs-latest\src\uffs\uffs_tree.c</FilePath>
             </File>
             <File>
-              <FileName>uffs_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\src\uffs\uffs_flash.c</FilePath>
-            </File>
-            <File>
               <FileName>dfs_uffs.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\dfs_uffs.c</FilePath>
             </File>
             <File>
+              <FileName>uffs_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\src\uffs\uffs_flash.c</FilePath>
+            </File>
+            <File>
               <FileName>uffs_version.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_version.c</FilePath>
+            </File>
+            <File>
+              <FileName>uffs_rtthread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\uffs_rtthread.c</FilePath>
             </File>
             <File>
               <FileName>uffs_debug.c</FileName>
@@ -2505,6 +2505,11 @@
               <FilePath>packages\uffs-latest\src\uffs\uffs_device.c</FilePath>
             </File>
             <File>
+              <FileName>uffs_nandif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\uffs-latest\uffs_nandif.c</FilePath>
+            </File>
+            <File>
               <FileName>uffs_fd.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_fd.c</FilePath>
@@ -2513,11 +2518,6 @@
               <FileName>uffs_utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_utils.c</FilePath>
-            </File>
-            <File>
-              <FileName>uffs_nandif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\uffs-latest\uffs_nandif.c</FilePath>
             </File>
             <File>
               <FileName>uffs_ecc.c</FileName>
@@ -2538,131 +2538,6 @@
               <FileName>uffs_fs.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\uffs-latest\src\uffs\uffs_fs.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>yaffs</GroupName>
-          <Files>
-            <File>
-              <FileName>yaffs_yaffs2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_yaffs2.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_allocator.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_allocator.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_tagscompat.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_tagscompat.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_endian.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_endian.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_checkptrw.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_checkptrw.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_attribs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\direct\yaffs_attribs.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_tagsmarshall.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_tagsmarshall.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_nameval.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_nameval.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_bitmap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_bitmap.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_packedtags2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_packedtags2.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_hweight.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\direct\yaffs_hweight.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_ecc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_ecc.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_yaffs1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_yaffs1.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_cache.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_cache.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_verify.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_verify.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_nand.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_nand.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_flashif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs_flashif.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_error.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\direct\yaffs_error.c</FilePath>
-            </File>
-            <File>
-              <FileName>dfs_yaffs_s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\dfs_yaffs_s.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_summary.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_summary.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_osglue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs_osglue.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_guts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_guts.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffs_packedtags1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\yaffs_packedtags1.c</FilePath>
-            </File>
-            <File>
-              <FileName>yaffsfs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\yaffs2-latest\yaffs\direct\yaffsfs.c</FilePath>
             </File>
           </Files>
         </Group>

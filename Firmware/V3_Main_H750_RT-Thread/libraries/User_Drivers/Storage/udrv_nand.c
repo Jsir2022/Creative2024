@@ -39,26 +39,33 @@ static struct rt_spi_device *spi_device = RT_NULL;
 //当写入失败位出现后执行resetchip可以清除写保护
 static void nand_resetchip(void)
 {
-  uint8_t cmd_reset_chip[1] = {NAND_CMD_DEV_RST};
+	// 复位芯片
+	uint8_t cmd_reset_chip[1] = {NAND_CMD_DEV_RST};
 	rt_spi_send(spi_device,cmd_reset_chip,1);
 	
 	rt_thread_mdelay(1);
 	
-	uint8_t cmd_write_sr[3] = {NAND_CMD_WRITE_SR,PROTECTION_REG,0x00};
-	rt_spi_send(spi_device,cmd_write_sr,3);
-	cmd_write_sr[1]=CONFIGURATION_REG;
+	// 关闭芯片总的写保护
+	uint8_t cmd_write_sr[3] = {NAND_CMD_WRITE_SR,PROTECTION_REG,PR_TURN_OFF_ALL_PROTECT};
 	rt_spi_send(spi_device,cmd_write_sr,3);
 	
+	// 开启ECC校验和Obb区域读写
+	cmd_write_sr[1]=CONFIGURATION_REG;
+	cmd_write_sr[2]=CR_BUF_OPERATE_MASK;// CR_ECC_ENABLE_MASK | 
+	rt_spi_send(spi_device,cmd_write_sr,3);
+	
+#if 0
 	uint8_t cmd_read_sr[2] = {NAND_CMD_READ_SR,PROTECTION_REG};
     uint8_t status = 0;
 	rt_spi_send_then_recv(spi_device,cmd_read_sr,2,&status,1);
-	NAND_DEBUG("Protection Register:%x\n",status);
+	NAND_DEBUG("\nProtection Register:%x\n",status);
 	cmd_read_sr[1]=CONFIGURATION_REG;
 	rt_spi_send_then_recv(spi_device,cmd_read_sr,2,&status,1);
 	NAND_DEBUG("Configuration Register :%x\n",status);
 	cmd_read_sr[1]=STATUS_REG;
 	rt_spi_send_then_recv(spi_device,cmd_read_sr,2,&status,1);
 	NAND_DEBUG("Status Register:%x\n",status);
+#endif
 }
 
 static rt_bool_t nand_readstatus(void)
@@ -80,13 +87,15 @@ static void nand_waitready(void)
 		rt_thread_mdelay(1);  // 可根据需要调整等待时间
 	}
 }
-			
+
+// 开启写保护
 static void nand_writeenable(void)
 {
     uint8_t cmd_write_en[1] = {NAND_CMD_WRITE_EN};
 	rt_spi_send(spi_device,cmd_write_en,1);
 }
 
+// 关闭写保护
 static void nand_writedisable(void)
 {
     uint8_t cmd_write_disen[1] = {NAND_CMD_WRITE_DISAB};
@@ -113,9 +122,6 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
                                    rt_uint8_t *data, rt_uint32_t data_len,
                                    rt_uint8_t *spare, rt_uint32_t spare_len)
 {
-    rt_uint32_t index;
-    rt_uint32_t gecc, recc;
-    rt_uint8_t tmp[4];
     rt_err_t result;
 
     page = page + device->block_start * device->pages_per_block;
@@ -123,10 +129,17 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
     {
         return -RT_MTD_EIO;
     }
-
+	
+	// 有部分页面是不给使用的
+	if(page < PAGE_ADDR_START)
+	{
+		return -RT_MTD_ENOMEM;
+	}
+	
     result = RT_MTD_EOK;
     rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
-
+	
+	//TODO：ECC校验和读取空闲区部分，也还没能连续页读取
     if (data && data_len)
     {
 		//读页数据到缓存中
@@ -165,50 +178,47 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
 		
 		/* 释放哑数据缓冲区 */
 		rt_free(dummy_tx);
-
-//TODO：ECC校验和读取空闲区部分
-
-//        FSMC_NANDECCCmd(FSMC_Bank3_NAND,ENABLE);
-//        dmaRead(data, data_len);
-//        gecc = FSMC_GetECC(FSMC_Bank3_NAND);
-//        FSMC_NANDECCCmd(FSMC_Bank3_NAND,DISABLE);
-
-//        if (data_len == PAGE_DATA_SIZE)
-//        {
-//            for (index = 0; index < ECC_SIZE; index ++)
-//                tmp[index] = nand_read8();
-//            if (spare && spare_len)
-//            {
-//                dmaRead(&spare[ECC_SIZE], spare_len - ECC_SIZE);
-//                rt_memcpy(spare, tmp , ECC_SIZE);
-//            }
-
-//            recc   = (tmp[3] << 24) | (tmp[2] << 16) | (tmp[1] << 8) | tmp[0];
-
-//            if (recc != 0xFFFFFFFF && gecc != 0)
-//                result = nand_datacorrect(gecc, recc, data);
-
-//            if (result != RT_MTD_EOK)
-//                NAND_DEBUG("page: %d, gecc %X, recc %X>",page, gecc, recc);
-
-//            goto _exit;
-//        }
-//    }
-
-//    if (spare && spare_len)
-//    {
-//        nand_cmd(NAND_CMD_READ_1);
-//        nand_addr(0);
-//        nand_addr(8);
-//        nand_addr(page);
-//        nand_addr(page >> 8);
-//        nand_addr(page >> 16);
-//        nand_cmd(NAND_CMD_READ_TRUE);
-
-//        nand_waitready();
-
-//        dmaRead(spare, spare_len);
     }
+	
+	if(spare && spare_len)
+	{
+		//读页数据到缓存中
+		uint8_t cmd_read_page[4]={NAND_CMD_READ_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
+		rt_spi_send(spi_device,cmd_read_page,4);
+		// 等待数据加载完成，检查 BUSY 位
+		nand_waitready();
+		
+		//读缓存中的数据
+		uint8_t cmd_read_data[4]={NAND_CMD_READ_BUFF,((PAGE_SIZE & 0xFF00) >> 8),(PAGE_SIZE & 0xFF),NULL};
+		/* 动态创建哑数据缓冲区（全0x00） */
+		uint8_t *dummy_tx = (uint8_t *)rt_malloc(spare_len);
+		rt_memset(dummy_tx, 0x00, spare_len); // 填充哑数据
+		
+		/* 定义消息链 */
+		struct rt_spi_message msg_cmd, msg_data;
+
+		/* 第一阶段：发送命令（忽略接收） */
+		msg_cmd.send_buf   = cmd_read_data;// 发送命令
+		msg_cmd.recv_buf   = NULL;         // 不关心接收数据
+		msg_cmd.length     = 4;            // 命令长度
+		msg_cmd.cs_take    = 1;            // 拉低 CS
+		msg_cmd.cs_release = 0;            // 保持 CS 低电平
+		msg_cmd.next       = &msg_data;    // 链接到下一阶段
+		
+		/* 第二阶段：接收数据（发送哑数据） */
+		msg_data.send_buf   = dummy_tx;    // 发送哑数据（如全0x00）
+		msg_data.recv_buf   = spare;	 	   // 接收有效数据
+		msg_data.length     = spare_len;    // 数据长度
+		msg_data.cs_take    = 0;           // 保持 CS 低电平
+		msg_data.cs_release = 1;           // 传输完成后释放 CS
+		msg_data.next       = NULL;        // 链式消息结束
+
+		/* 执行传输 */
+		rt_spi_transfer_message(spi_device, &msg_cmd); // 触发链式传输
+		
+		/* 释放哑数据缓冲区 */
+		rt_free(dummy_tx);
+	}
 _exit:
     rt_mutex_release(&_device.lock);
 
@@ -220,8 +230,7 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
                                     const rt_uint8_t *spare, rt_uint32_t spare_len)
 {
     rt_err_t result;
-    rt_uint32_t gecc;
-
+	
     page = page + device->block_start * device->pages_per_block;
     if (page/device->pages_per_block > device->block_end)
     {
@@ -230,82 +239,73 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
 
     result = RT_MTD_EOK;
     rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
-
-    if (data && data_len)
+	
+	//TODO：ECC校验和读取空闲区部分，连续写入未实现
+	if ((spare && spare_len) && (data && data_len))
     {
-		rt_uint8_t* pdata = (rt_uint8_t*)data;
-		
+		//写使能
+		nand_writeenable();
+		//先写指令再写缓存，中间CS拉低不能断
 		uint8_t cmd_write_buff[3]={NAND_CMD_WRITE_BUFF,0,0};
+		/* 定义消息链 */
+		struct rt_spi_message msg_cmd, msg_data, msg_spare;
+
+		/* 第一阶段：发送命令（忽略接收） */
+		msg_cmd.send_buf   = cmd_write_buff;// 发送命令
+		msg_cmd.recv_buf   = NULL;       	 // 不关心接收数据
+		msg_cmd.length     = 3;          	 // 命令长度
+		msg_cmd.cs_take    = 1;           	 // 拉低 CS
+		msg_cmd.cs_release = 0;           	 // 保持 CS 低电平
+		msg_cmd.next       = &msg_data;   	 // 链接到下一阶段
 		
-		for(uint32_t round = data_len/PAGE_SIZE; round != 0; round--)
-		{
-			//写使能
-			nand_writeenable();
-			//先写指令再写缓存，中间CS拉低不能断
-			rt_spi_send_then_send(spi_device,cmd_write_buff,3,pdata,PAGE_SIZE);
-			pdata=pdata+PAGE_SIZE;
-			nand_waitready();
-			//把缓存中的数据写到页中
-			uint8_t cmd_write_page[4]={NAND_CMD_WRITE_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
-			rt_spi_send(spi_device,cmd_write_page,4);
-			page++;
-			nand_waitready();
-		}
+		/* 第二阶段：发送命令（忽略接收） */
+		msg_data.send_buf   = data;			// 发送命令
+		msg_data.recv_buf   = NULL;       	 // 不关心接收数据
+		msg_data.length     = data_len;       // 命令长度
+		msg_data.cs_take    = 1;           	 // 拉低 CS
+		msg_data.cs_release = 0;           	 // 保持 CS 低电平
+		msg_data.next       = &msg_spare;   	 // 链接到下一阶段
 		
-		uint16_t remain = data_len%PAGE_SIZE;
-		if(remain != 0)
-		{
-			//写使能
-			nand_writeenable();
-			//写缓存
-			rt_spi_send_then_send(spi_device,cmd_write_buff,3,pdata,remain);
-			//把缓存中的数据写到页中
-			uint8_t cmd_write_page[4]={NAND_CMD_WRITE_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
-			rt_spi_send(spi_device,cmd_write_page,4);
-			
-		}
+		/* 第三阶段：发送数据（忽略接收） */
+		msg_spare.send_buf   = spare;    		// 发送哑数据（如全0x00）
+		msg_spare.recv_buf   = NULL;	 	  	// 不关心接收数据
+		msg_spare.length     = spare_len;    	// 数据长度
+		msg_spare.cs_take    = 0;           	// 保持 CS 低电平
+		msg_spare.cs_release = 1;           	// 传输完成后释放 CS
+		msg_spare.next       = NULL;        	// 链式消息结束
+
+		/* 执行传输 */
+		rt_spi_transfer_message(spi_device, &msg_cmd); // 触发链式传输
 		
-//TODO：ECC校验和读取空闲区部分
+		// 等待NAND执行结束
+		nand_waitready();
 		
-//        if (data_len == PAGE_DATA_SIZE)
-//        {
-//            nand_write8((uint8_t)gecc);
-//            nand_write8((uint8_t)(gecc >> 8));
-//            nand_write8((uint8_t)(gecc >> 16));
-//            nand_write8((uint8_t)(gecc >> 24));
-
-//            if (spare && spare_len)
-//                dmaWrite(&spare[ECC_SIZE], spare_len - ECC_SIZE);
-//        }
-
-//        nand_cmd(NAND_CMD_PAGEPROGRAM_TRUE);
-
-//        nand_waitready();
-
-//        if (nand_readstatus() & 0x01 == 1)
-//            result = -RT_MTD_EIO;
-//        goto _exit;
-//    }
-
-//    if (spare && spare_len)
+		//把缓存中的数据写到页中
+		uint8_t cmd_write_page[4]={NAND_CMD_WRITE_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
+		rt_spi_send(spi_device,cmd_write_page,4);
+		
+		//写失能
+		nand_writedisable();
+	}
+	else
+	{
+		return -RT_MTD_ENOMEM;
+	}
+	
+//    if (data && data_len)
 //    {
-//        nand_cmd(NAND_CMD_PAGEPROGRAM);
-
-//        nand_addr(ECC_SIZE);
-//        nand_addr(0x08);
-//        nand_addr(page);
-//        nand_addr(page >> 8);
-//        nand_addr(page >> 16);
-
-//        dmaWrite(&spare[ECC_SIZE], spare_len - ECC_SIZE);
-
-//        nand_cmd(NAND_CMD_PAGEPROGRAM_TRUE);
-//        nand_waitready();
-
-//        if (nand_readstatus() & 0x01 == 1)
-//            result = -RT_MTD_EIO;
-    }
-
+//		//写使能
+//		nand_writeenable();
+//		//先写指令再写缓存，中间CS拉低不能断
+//		uint8_t cmd_write_buff[3]={NAND_CMD_WRITE_BUFF,0,0};
+//		rt_spi_send_then_send(spi_device,cmd_write_buff,3,data,data_len);
+//		nand_waitready();
+//		//把缓存中的数据写到页中
+//		uint8_t cmd_write_page[4]={NAND_CMD_WRITE_PAGE,NULL,((page & 0xFF00) >> 8),(page & 0xFF)};
+//		rt_spi_send(spi_device,cmd_write_page,4);
+//		//写失能
+//		nand_writedisable();
+//    }
 _exit:
     rt_mutex_release(&_device.lock);
 
@@ -411,7 +411,7 @@ static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t s
 
 //    rt_mutex_release(&_device.lock);
 
-//    return (result);
+//    return (result); 
 }
 #endif
 static rt_err_t nandflash_checkblock(struct rt_mtd_nand_device* device, rt_uint32_t block)
@@ -466,9 +466,9 @@ static int rt_hw_mtd_nand_init(void)
 	nand_flash.plane_num   = 1;
 	
     nand_flash.pages_per_block = PAGE_PER_BLOCK;
-    nand_flash.block_total = TOTAL_BLOCK-1;
+    nand_flash.block_total = TOTAL_BLOCK;
     
-    nand_flash.block_start = 1;
+    nand_flash.block_start = 0;
     nand_flash.block_end   = TOTAL_BLOCK-1;
 	
     nand_flash.ops         = &ops;

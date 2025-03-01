@@ -14,15 +14,8 @@
 
 #include "dfs_fs.h"
 #include "udrv_nand.h"
-#include "yaffsfs.h"
-#include "dfs_fs.h"
 
 //int ret = 0;
-
-int main(void)
-{
-	int ret = 0;
-	rt_mtd_nand_t nand_dev = (rt_mtd_nand_t)rt_device_find("nand0");
 //	ret = yaffs_start_up(nand_dev,"/");
 	
 //	ret = dfs_mkfs("yaffs", "nand0");
@@ -42,6 +35,20 @@ int main(void)
 //	{
 //		rt_kprintf("Mount failue at root\n");
 //	}
+
+int main(void)
+{
+	int ret = 0;
+	rt_mtd_nand_t nand_dev = (rt_mtd_nand_t)rt_device_find("nand0");
+
+	ret = dfs_mount("nand0", "/", "uffs", 0, 0);
+    if (ret == 0) {
+        rt_kprintf("Mount success at root\n");
+    }
+	else
+	{
+		rt_kprintf("Mount failue at root\n");
+	}
 	
     for(;;)
     {

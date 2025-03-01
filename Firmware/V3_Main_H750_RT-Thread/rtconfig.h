@@ -199,12 +199,10 @@
 
 /* Micrium: Micrium software products porting for RT-Thread */
 
-#define PKG_USING_DFS_YAFFS
-#define PKG_USING_YAFFS_LATEST_VERSION
 #define PKG_USING_DFS_UFFS
 #define RT_USING_DFS_UFFS
-#define RT_UFFS_ECC_MODE_0
-#define RT_UFFS_ECC_MODE 0
+#define RT_UFFS_ECC_MODE_1
+#define RT_UFFS_ECC_MODE 1
 #define PKG_USING_DFS_UFFS_LATEST_VERSION
 
 /* peripheral libraries and drivers */
