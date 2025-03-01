@@ -26,15 +26,9 @@
 
 #define NAND_DEBUG rt_kprintf
 
-struct stm32h7_nand
-{
-    uint8_t id[3];
-    struct rt_mutex lock;
-    struct rt_completion comp;
-}_device;
-
 static struct rt_mtd_nand_device nand_flash;
 static struct rt_spi_device *spi_device = RT_NULL;
+static struct rt_mutex nandlock;
 
 //当写入失败位出现后执行resetchip可以清除写保护
 static void nand_resetchip(void)
@@ -137,7 +131,7 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
 	}
 	
     result = RT_MTD_EOK;
-    rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+    rt_mutex_take(&nandlock, RT_WAITING_FOREVER);
 	
 	//TODO：ECC校验和读取空闲区部分，也还没能连续页读取
     if (data && data_len)
@@ -220,7 +214,7 @@ static rt_err_t nandflash_readpage(struct rt_mtd_nand_device* device, rt_off_t p
 		rt_free(dummy_tx);
 	}
 _exit:
-    rt_mutex_release(&_device.lock);
+    rt_mutex_release(&nandlock);
 
     return (result);
 }
@@ -237,8 +231,14 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
         return -RT_MTD_EIO;
     }
 
+	// 有部分页面是不给使用的
+	if(page < PAGE_ADDR_START)
+	{
+		return -RT_MTD_ENOMEM;
+	}
+	
     result = RT_MTD_EOK;
-    rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+    rt_mutex_take(&nandlock, RT_WAITING_FOREVER);
 	
 	//TODO：ECC校验和读取空闲区部分，连续写入未实现
 	if ((spare && spare_len) && (data && data_len))
@@ -292,6 +292,7 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
 		return -RT_MTD_ENOMEM;
 	}
 	
+	// 分开写入data和spare区是不成功的，最好就是一起写
 //    if (data && data_len)
 //    {
 //		//写使能
@@ -307,7 +308,7 @@ static rt_err_t nandflash_writepage(struct rt_mtd_nand_device* device, rt_off_t 
 //		nand_writedisable();
 //    }
 _exit:
-    rt_mutex_release(&_device.lock);
+    rt_mutex_release(&nandlock);
 
     return (result);
 }
@@ -317,7 +318,7 @@ rt_err_t nandflash_eraseblock(struct rt_mtd_nand_device* device, rt_uint32_t blo
 	rt_err_t result;
 	result = RT_MTD_EOK;
 	
-	rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+	rt_mutex_take(&nandlock, RT_WAITING_FOREVER);
 	
 	//写使能
 	nand_writeenable();
@@ -325,7 +326,7 @@ rt_err_t nandflash_eraseblock(struct rt_mtd_nand_device* device, rt_uint32_t blo
 	rt_spi_send(spi_device,cmd_erase_block,4);
 	nand_waitready();
 
-    rt_mutex_release(&_device.lock);
+    rt_mutex_release(&nandlock);
 
     return (result);
 }
@@ -345,7 +346,7 @@ static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t s
         return -RT_MTD_EIO;
     }
 
-    rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+    rt_mutex_take(&nandlock, RT_WAITING_FOREVER);
 
     /*------------------ 1. 发送 Copy-Back 读命令 ------------------*/
     // 命令序列: NAND_CMD_RDCOPYBACK -> 地址 -> NAND_CMD_RDCOPYBACK_TRUE
@@ -369,7 +370,7 @@ static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t s
     }
 
 _exit:
-    rt_mutex_release(&_device.lock);
+    rt_mutex_release(&nandlock);
     return result;
 }
 #else
@@ -381,7 +382,7 @@ static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t s
 //    dst_page = dst_page + device->block_start * device->pages_per_block;
 
 //    result = RT_MTD_EOK;
-//    rt_mutex_take(&_device.lock, RT_WAITING_FOREVER);
+//    rt_mutex_take(&nandlock, RT_WAITING_FOREVER);
 
 //    nand_cmd(NAND_CMD_RDCOPYBACK);
 
@@ -409,7 +410,7 @@ static rt_err_t nandflash_pagecopy(struct rt_mtd_nand_device *device, rt_off_t s
 //    if ((nand_readstatus() & 0x01) == 0x01)
 //        result = -RT_MTD_EIO;
 
-//    rt_mutex_release(&_device.lock);
+//    rt_mutex_release(&nandlock);
 
 //    return (result); 
 }
@@ -481,7 +482,7 @@ static int rt_hw_mtd_nand_init(void)
 	
 	nand_resetchip();
 	
-	rt_mutex_init(&_device.lock, "nand", RT_IPC_FLAG_FIFO);
+	rt_mutex_init(&nandlock, "nand", RT_IPC_FLAG_FIFO);
 	
 	return RT_EOK;
 }
